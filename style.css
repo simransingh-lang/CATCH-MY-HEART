@@ -1,0 +1,480 @@
+/* ==========================================================
+   CATCH MY HEART 💖 - Raw Vintage Torn-Paper & Pixel Style
+   ========================================================== */
+
+:root {
+  --bg-dark: #121316;
+  --charcoal-ink: #1E1C1A;
+  --parchment-light: #EFE6D5;
+  --parchment-mid: #D8C7A5;
+  --parchment-dark: #C2B28F;
+  --crimson-muted: #A33B32;
+  --crimson-dark: #7A241D;
+  --burnt-orange: #C4622D;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-vt: 'VT323', monospace;
+  --font-typewriter: 'Special Elite', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 50% 50%, #1c1d22 0%, #121316 80%);
+  font-family: var(--font-vt);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  overflow-x: hidden;
+  color: var(--charcoal-ink);
+}
+
+/* Subtle Film Grain Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Charcoal Arcade Frame */
+.arcade-container {
+  width: 100%;
+  max-width: 530px;
+  background: #1a1b20;
+  border: 4px solid var(--charcoal-ink);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: 6px 6px 0px #000000;
+  filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.5));
+}
+
+/* Header & Muted Title */
+.game-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.torn-header-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--parchment-mid);
+  color: var(--charcoal-ink);
+  padding: 8px 16px;
+  border: 2px solid var(--charcoal-ink);
+  box-shadow: 3px 3px 0px var(--charcoal-ink);
+  margin-bottom: 10px;
+  clip-path: polygon(0% 4%, 12% 0%, 25% 3%, 38% 0%, 52% 4%, 66% 1%, 80% 4%, 94% 0%, 100% 3%, 98% 95%, 85% 100%, 70% 96%, 54% 99%, 40% 95%, 26% 100%, 12% 96%, 0% 98%);
+}
+
+.pixel-title {
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  color: var(--crimson-muted);
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0px var(--parchment-light);
+}
+
+.stamp-icon {
+  font-size: 1rem;
+}
+
+/* HUD Bar - Vintage Parchment Tags */
+.hud-torn-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--parchment-dark);
+  border: 2px solid var(--charcoal-ink);
+  padding: 6px 10px;
+  box-shadow: 3px 3px 0px var(--charcoal-ink);
+  gap: 4px;
+}
+
+.hud-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--parchment-light);
+  border: 2px solid var(--charcoal-ink);
+  padding: 2px 8px;
+}
+
+.hud-label {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--crimson-muted);
+  margin-bottom: 2px;
+}
+
+.hud-value {
+  font-family: var(--font-vt);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--charcoal-ink);
+}
+
+.time-tag {
+  background: var(--parchment-mid);
+}
+
+.time-tag.time-warning {
+  background: var(--crimson-muted);
+  border-color: #000;
+  animation: timerFlash 0.5s infinite alternate;
+}
+
+.time-tag.time-warning .hud-label,
+.time-tag.time-warning .hud-value {
+  color: var(--parchment-light) !important;
+}
+
+@keyframes timerFlash {
+  0% { transform: scale(0.96); }
+  100% { transform: scale(1.06); }
+}
+
+.speed-tag {
+  background: var(--burnt-orange);
+  border-color: var(--charcoal-ink);
+}
+
+.speed-tag.hidden {
+  display: none !important;
+}
+
+.speed-text {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--parchment-light);
+}
+
+.hud-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* Buttons */
+.torn-btn {
+  font-family: var(--font-pixel);
+  border: 2px solid var(--charcoal-ink);
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.1s ease;
+  box-shadow: 3px 3px 0px var(--charcoal-ink);
+}
+
+.torn-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--charcoal-ink);
+}
+
+.icon-btn {
+  background: var(--parchment-light);
+  color: var(--charcoal-ink);
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background: var(--parchment-mid);
+}
+
+.action-btn {
+  background: var(--crimson-muted);
+  color: var(--parchment-light);
+  padding: 12px 24px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  clip-path: polygon(0% 6%, 15% 0%, 30% 5%, 48% 0%, 65% 6%, 82% 1%, 100% 5%, 98% 95%, 82% 100%, 64% 94%, 46% 99%, 28% 95%, 12% 100%, 0% 94%);
+}
+
+.action-btn:hover {
+  background: var(--crimson-dark);
+}
+
+.secondary-btn {
+  background: var(--parchment-mid);
+  color: var(--charcoal-ink);
+  padding: 10px 20px;
+  font-size: 0.75rem;
+  clip-path: polygon(0% 4%, 18% 0%, 36% 4%, 55% 0%, 75% 5%, 92% 0%, 100% 4%, 97% 96%, 78% 100%, 60% 95%, 40% 99%, 20% 95%, 0% 98%);
+}
+
+.secondary-btn:hover {
+  background: var(--parchment-dark);
+}
+
+/* Canvas Wrapper */
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 6.5;
+  background: #121316;
+  border: 3px solid var(--charcoal-ink);
+  overflow: hidden;
+  box-shadow: inset 0 0 20px #000000;
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Retro CRT Scanlines */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.4) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.5;
+}
+
+/* Overlay Screen Container */
+.overlay-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 19, 22, 0.92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  padding: 16px;
+}
+
+.overlay-screen.hidden {
+  display: none !important;
+}
+
+.overlay-screen.active {
+  display: flex !important;
+}
+
+/* Aged Parchment Scrap */
+.parchment-scrap {
+  background: var(--parchment-light);
+  color: var(--charcoal-ink);
+  padding: 28px 22px;
+  text-align: center;
+  width: 100%;
+  max-width: 410px;
+  border: 2px solid var(--charcoal-ink);
+  position: relative;
+
+  clip-path: polygon(
+    0% 2%, 7% 0%, 15% 3%, 24% 0%, 35% 4%, 46% 0%, 58% 3%, 69% 0%, 80% 4%, 91% 0%, 100% 3%,
+    98% 16%, 100% 30%, 97% 45%, 100% 60%, 98% 75%, 100% 90%, 97% 98%,
+    88% 96%, 76% 100%, 64% 96%, 50% 99%, 38% 95%, 26% 100%, 14% 96%, 3% 99%, 0% 96%,
+    2% 82%, 0% 66%, 3% 50%, 0% 34%, 2% 18%
+  );
+
+  filter: drop-shadow(5px 5px 0px var(--charcoal-ink));
+}
+
+.tape-strip {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 110px;
+  height: 24px;
+  background: rgba(225, 215, 190, 0.65);
+  border: 1px dashed rgba(100, 90, 70, 0.4);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.scrap-title {
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  color: var(--crimson-muted);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.headline-bold {
+  font-size: 1.25rem;
+  color: var(--crimson-dark);
+}
+
+.scrap-subtitle {
+  font-family: var(--font-typewriter);
+  font-size: 1rem;
+  color: #4a453f;
+  margin-bottom: 16px;
+}
+
+/* Typewriter Notes Card */
+.typewriter-notes {
+  background: var(--parchment-mid);
+  border: 2px dashed var(--charcoal-ink);
+  padding: 12px;
+  margin-bottom: 16px;
+  text-align: left;
+  font-family: var(--font-typewriter);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.controls-text {
+  font-family: var(--font-vt);
+  font-size: 1.1rem;
+  color: var(--charcoal-ink);
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+/* Letter Note on Victory Parchment */
+.letter-note {
+  background: var(--parchment-mid);
+  border: 2px solid var(--charcoal-ink);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 3px 3px 0px var(--charcoal-ink);
+}
+
+.typewriter-main {
+  font-family: var(--font-typewriter);
+  font-weight: bold;
+  font-size: 1.15rem;
+  color: var(--charcoal-ink);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.paper-divider {
+  font-family: var(--font-vt);
+  color: var(--crimson-muted);
+  font-size: 1.1rem;
+  margin: 6px 0;
+  letter-spacing: 2px;
+}
+
+.typewriter-sub {
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.score-summary-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--charcoal-ink);
+  margin-bottom: 18px;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vintage-stamp {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  border: 2px solid var(--crimson-muted);
+  color: var(--crimson-muted);
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  padding: 4px 6px;
+  transform: rotate(12deg);
+  opacity: 0.8;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.touch-btn {
+  background: var(--parchment-mid);
+  color: var(--charcoal-ink);
+  border: 2px solid var(--charcoal-ink);
+  font-family: var(--font-pixel);
+  font-size: 1.3rem;
+  width: 70px;
+  height: 48px;
+  box-shadow: 3px 3px 0px var(--charcoal-ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.touch-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--charcoal-ink);
+  background: var(--crimson-muted);
+  color: var(--parchment-light);
+}
+
+.touch-hint {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--parchment-mid);
+  text-align: center;
+}
+
+/* Footer */
+.game-footer {
+  margin-top: 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--parchment-dark);
+  letter-spacing: 1px;
+}
+
+/* Screen Shake Effect */
+.shake {
+  animation: rawShake 0.22s steps(4) both;
+}
+
+@keyframes rawShake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-4px, 2px); }
+  50% { transform: translate(4px, -2px); }
+  75% { transform: translate(-2px, -4px); }
+  100% { transform: translate(0, 0); }
+}
