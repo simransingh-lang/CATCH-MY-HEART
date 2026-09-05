@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Catch My Heart - Raw Vintage Torn-Paper Mini-Game</title>
+  <!-- Google Fonts: VT323 (Pixel), Press Start 2P (Retro Arcade), Special Elite (Typewriter Stamp) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Grainy Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- Raw Vintage CRT / Charcoal Arcade Wrapper -->
+  <div class="arcade-container torn-card-frame">
+    
+    <!-- Muted Vintage Header -->
+    <header class="game-header">
+      <div class="torn-header-badge">
+        <span class="stamp-icon">⚔️</span>
+        <h1 class="pixel-title">CATCH MY HEART</h1>
+        <span class="stamp-icon">⚔️</span>
+      </div>
+      
+      <div class="hud-torn-bar">
+        <div class="hud-tag level-tag">
+          <span class="hud-label">LVL</span>
+          <span id="level-display" class="hud-value">1</span>
+        </div>
+
+        <div class="hud-tag score-tag">
+          <span class="hud-label">SCORE</span>
+          <span id="score-display" class="hud-value">0 / 15</span>
+        </div>
+
+        <div class="hud-tag time-tag" id="time-container">
+          <span class="hud-label">TIME</span>
+          <span id="time-display" class="hud-value">20s</span>
+        </div>
+
+        <div class="hud-tag speed-tag hidden" id="speed-indicator">
+          <span class="speed-text">⚡ SPEED!</span>
+        </div>
+
+        <div class="hud-actions">
+          <button id="btn-audio" class="torn-btn icon-btn" title="Toggle Sound">
+            <span id="audio-icon">🔊</span>
+          </button>
+          <button id="btn-reset" class="torn-btn icon-btn" title="Reset Level">
+            <span>🔄</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Canvas Stage Container -->
+    <div class="canvas-wrapper torn-canvas-border">
+      <canvas id="gameCanvas" width="500" height="650"></canvas>
+
+      <!-- Scanlines Overlay -->
+      <div class="scanlines"></div>
+
+      <!-- Torn Parchment Start Overlay -->
+      <div id="start-overlay" class="overlay-screen active">
+        <div class="parchment-scrap start-scrap">
+          <div class="tape-strip top-tape"></div>
+          <h2 class="scrap-title">CATCH MY HEART</h2>
+          <p class="scrap-subtitle">~ Timed Vintage Mini-Game ~</p>
+
+          <div class="typewriter-notes">
+            <p><strong>ROUND 1:</strong> 20s Timer | Target: 15 Pts</p>
+            <p>⚡ Speed accelerates every <strong>6 seconds</strong>!</p>
+            <p><strong>ROUND 2:</strong> 30s Timer | Rapid Speed | <strong>-2 Pts</strong> Obstacles!</p>
+            <p>💖 Single: <strong>+1</strong> | 💞 Combo: <strong>+2/+3</strong> | 🍕 Snack: <strong>+1</strong></p>
+          </div>
+
+          <p class="controls-text">[ ⌨️ ARROWS / A-D &nbsp;|&nbsp; 🖱️ MOUSE &nbsp;|&nbsp; 📱 TOUCH ]</p>
+          <button id="btn-start" class="torn-btn action-btn">START GAME ♥️</button>
+        </div>
+      </div>
+
+      <!-- Torn Parchment Victory & Time-Up Modal -->
+      <div id="victory-modal" class="overlay-screen hidden">
+        <div class="parchment-scrap victory-scrap">
+          <div class="tape-strip top-tape"></div>
+          <div id="modal-stamp" class="vintage-stamp">STAMPED</div>
+          <h2 id="victory-headline" class="scrap-title headline-bold">HIGH SCORE!</h2>
+          
+          <div class="letter-note">
+            <p id="main-love-msg" class="typewriter-main">I love you ami. ♥️</p>
+            <div class="paper-divider">-----------------------</div>
+            <p id="next-level-msg" class="typewriter-sub">
+              Want even more of my love? Complete the upcoming hurdles waiting for you!
+            </p>
+          </div>
+
+          <div class="score-summary-badge">
+            <span id="modal-score-text">Final Score: <strong id="modal-score">15 / 15</strong></span>
+          </div>
+
+          <div class="modal-buttons">
+            <button id="btn-next-level" class="torn-btn action-btn">NEXT LEVEL ♥️</button>
+            <button id="btn-replay" class="torn-btn secondary-btn">PLAY AGAIN 🔄</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- On-Screen Mobile Controls -->
+    <div class="mobile-controls">
+      <button id="btn-left" class="touch-btn">◄</button>
+      <div class="touch-hint">SLIDE TO MOVE RED BASKET</div>
+      <button id="btn-right" class="touch-btn">►</button>
+    </div>
+
+    <footer class="game-footer">
+      <span>✦ HANDCRAFTED FOR AMI ✦</span>
+    </footer>
+
+  </div>
+
+  <!-- Game & Audio Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
